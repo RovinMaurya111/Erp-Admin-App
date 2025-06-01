@@ -1,20 +1,23 @@
 
 import 'package:file_picker/file_picker.dart';
 
-pickImg()async{
-  
-  try{
-  final _picker = FilePicker.platform;
-  final _image = await _picker.pickFiles();
+Future<Map<String, dynamic>?> pickImg() async {
+  try {
+    final picker = FilePicker.platform;
+    final picked = await picker.pickFiles(withData: true,);
 
-  final _imageDetails = _image?.files[0];
+    final imagedata = picked?.files[0];
+    if(imagedata!= null) {
+       return {
+        'originalname': imagedata.name,
+        'bytes': imagedata.bytes,
+       };
+    }
 
-  print(_imageDetails?.name);
-  print(_imageDetails?.path);
-  print(_imageDetails?.size);
-
-  }catch(e){
+  } catch (e) {
     print("Error picking image: $e");
+    return null;
   }
-
+  return null;
 }
+

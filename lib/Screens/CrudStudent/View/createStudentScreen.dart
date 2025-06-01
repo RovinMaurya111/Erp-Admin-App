@@ -1,7 +1,8 @@
-import 'dart:ui';
 
+import 'dart:typed_data';
+import 'dart:ui' show ImageFilter;
 import 'package:admin/Screens/CrudStudent/Provider/isLoadingProvider.dart';
-import 'package:admin/Screens/CrudStudent/Service/createStudentData.dart';
+import 'package:admin/Screens/CrudStudent/Service/crudStudent.dart';
 import 'package:admin/Screens/CrudStudent/Widget/pickImg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -28,6 +29,7 @@ class _CreatestudentState extends ConsumerState<Createstudent> {
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _repasswordController = TextEditingController();
   final TextEditingController _rollController = TextEditingController();
+  Map<String, dynamic>? _imagedata;
 
   @override
   Widget build(BuildContext context) {
@@ -88,16 +90,25 @@ class _CreatestudentState extends ConsumerState<Createstudent> {
                     ],
                   ),
                   const Gap(20),
+                  // 
+                  // profile image
                   CircleAvatar(
                     radius: 62,
                     backgroundColor: Colors.black,
                     child: CircleAvatar(
                       radius: 60,
-                      backgroundColor: Colors.deepPurple,
+                      backgroundImage:MemoryImage(_imagedata?['bytes'] ?? Uint8List(0), scale: 1.0),
                       child: IconButton(
+                      
                         onPressed: () async{
+                           final _newImage = await pickImg();
+                          setState(() {
+                            if(_newImage != null){
+                              _imagedata = _newImage;
+                            }
+                          });
                           // 
-                          await pickImg();
+                          
                         },
                         icon: const Icon(
                           Icons.camera_alt_outlined,
@@ -162,7 +173,8 @@ class _CreatestudentState extends ConsumerState<Createstudent> {
       ),
     );
   }
-
+// 
+// 
   Widget buildTextField(String hint, TextEditingController controller) {
     return SizedBox(
       width: 250,
@@ -182,7 +194,8 @@ class _CreatestudentState extends ConsumerState<Createstudent> {
       ),
     );
   }
-
+// 
+// 
   void clearTextFields() {
     _nameController.clear();
     _mobileController.clear();
@@ -211,10 +224,15 @@ class _CreatestudentState extends ConsumerState<Createstudent> {
         _rollController.text.isNotEmpty;
   }
 
+// 
   bool _isPasswordValid() {
     return _passwordController.text == _repasswordController.text;
   }
-
+// 
+// 
+// 
+// submisstion form
+// 
   _formSubmission(BuildContext context) async {
     if (!_validator()) {
       MotionToast.error(
@@ -235,7 +253,7 @@ class _CreatestudentState extends ConsumerState<Createstudent> {
     await Future.delayed(const Duration(seconds: 3));
 
     try {
-      createStudentData(
+      CrudStudent().createStudentData(
         context,
         _nameController.text.trim(),
         _mobileController.text.trim(),
@@ -247,6 +265,7 @@ class _CreatestudentState extends ConsumerState<Createstudent> {
         _emailController.text.trim(),
         _passwordController.text.trim(),
         _rollController.text.trim(),
+        _imagedata!,
       );
       clearTextFields();
     } catch (e) {
