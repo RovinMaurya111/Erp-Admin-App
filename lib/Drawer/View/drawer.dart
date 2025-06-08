@@ -16,7 +16,7 @@ class CustomDrawer extends ConsumerWidget {
   Widget _customListTile(String path, String text, VoidCallback onTap) {
     return ListTile(
       leading: SvgPicture.asset(
-        "Assets/Svg/$path.svg",
+        "assets/svg/$path.svg",
         width: 25, height: 25,
         fit: BoxFit.cover,
         allowDrawingOutsideViewBox: true,

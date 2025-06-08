@@ -19,7 +19,7 @@ class CrudStudent{
   String email,
   String password,
   String roll,
-  Map<String, dynamic> _imagedata,
+  Map<String, dynamic> imagedata,
 ) async {
 
   final url = Uri.parse("http://localhost:3000/students/class2/create");
@@ -42,18 +42,17 @@ class CrudStudent{
 
     final request = http.MultipartRequest('POST', url);
 
+
     request.fields['studentData'] = studentModel.toJson();
-    print("student data is : ${request.fields['studentData']}");
+
 
     request.files.add(http.MultipartFile.fromBytes(
       'Profile_image', 
-      _imagedata['bytes'], 
-      filename: _imagedata['originalname'], 
+      imagedata['bytes'], 
+      filename: imagedata['originalname'], 
       contentType: MediaType('image', 'jpeg')
     ));
-
-    print("profile image bytes is : ${_imagedata['bytes']}");
-
+    
     final result = await request.send();
     final response = await result.stream.bytesToString();
 

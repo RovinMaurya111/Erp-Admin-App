@@ -3,7 +3,7 @@ import 'dart:typed_data';
 import 'dart:ui' show ImageFilter;
 import 'package:admin/Screens/CrudStudent/Provider/isLoadingProvider.dart';
 import 'package:admin/Screens/CrudStudent/Service/crudStudent.dart';
-import 'package:admin/Screens/CrudStudent/Widget/pickImg.dart';
+import 'package:admin/Global/Widget/pickImg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
@@ -33,6 +33,7 @@ class _CreatestudentState extends ConsumerState<Createstudent> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Stack(
         children: [
@@ -101,10 +102,10 @@ class _CreatestudentState extends ConsumerState<Createstudent> {
                       child: IconButton(
                       
                         onPressed: () async{
-                           final _newImage = await pickImg();
+                           final newImage = await pickImg();
                           setState(() {
-                            if(_newImage != null){
-                              _imagedata = _newImage;
+                            if(newImage != null){
+                              _imagedata = newImage;
                             }
                           });
                           // 

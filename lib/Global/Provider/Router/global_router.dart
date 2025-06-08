@@ -1,4 +1,6 @@
 import 'package:admin/Drawer/View/drawer.dart';
+import 'package:admin/Screens/Academic/ManageTeacher/View/createTeacher.dart';
+import 'package:admin/Screens/Academic/ManageTeacher/View/manageTeachers.dart';
 import 'package:admin/Screens/Academic/StudentsList/View/studentsList.dart';
 import 'package:admin/Screens/Academic/View/academic.dart';
 import 'package:admin/Screens/Account/View/Account.dart';
@@ -45,8 +47,10 @@ final Global_Router = Provider((ref) {
         GoRoute(path: '/complaint', builder: (context, state) => Complaint(),),
         GoRoute(path: '/settings', builder: (context, state) => Settings(),),
         ]
-    ), 
+    ),
         GoRoute(path: '/studentList', builder: (context, state) => Studentslist(),),
         GoRoute(path: '/createStudent', builder: (context, state) => Createstudent()),
+        GoRoute(path: '/createTeacher', builder: (context, state) => CreateTeacher()),
+        GoRoute(path: '/manageTeachers', builder: (context, state) => Manageteachers(),), 
     ]);
 },);
