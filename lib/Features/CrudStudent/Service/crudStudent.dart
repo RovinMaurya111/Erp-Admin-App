@@ -1,5 +1,5 @@
 
-import 'package:admin/Screens/CrudStudent/Model/studentModel.dart';
+import 'package:admin/Features/CrudStudent/Model/studentModel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:motion_toast/motion_toast.dart';

@@ -1,4 +1,4 @@
-import 'package:admin/Screens/Academic/Widget/customGridView.dart';
+import 'package:admin/Features/Academic/Widget/customGridView.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

@@ -1,8 +1,9 @@
-import 'package:admin/Screens/Academic/ManageTeacher/Provider/indexProvider.dart';
-import 'package:admin/Screens/Academic/ManageTeacher/Widget/customHeader.dart';
-import 'package:admin/Screens/Academic/ManageTeacher/Widget/employeeContainer.dart';
-import 'package:admin/Screens/Academic/ManageTeacher/Widget/profileContainer.dart';
-import 'package:admin/Screens/Home/Provider/onHoverProvider.dart';
+import 'package:admin/Features/Academic/Staff/Teachers/Provider/indexProvider.dart';
+import 'package:admin/Features/Academic/Staff/Teachers/Widget/customHeader.dart';
+import 'package:admin/Features/Academic/Staff/Teachers/Widget/employeeContainer.dart';
+import 'package:admin/Features/Academic/Staff/Teachers/Widget/profileContainer.dart';
+import 'package:admin/Features/Home/Provider/onHoverProvider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

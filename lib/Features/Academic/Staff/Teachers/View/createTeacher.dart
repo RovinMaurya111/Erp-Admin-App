@@ -1,8 +1,9 @@
 import 'dart:typed_data';
 import 'dart:ui' show ImageFilter;
+import 'package:admin/Features/Academic/Staff/Teachers/Service/Create/createTeacherBackend.dart';
+import 'package:admin/Features/CrudStudent/Provider/isLoadingProvider.dart';
 import 'package:admin/Global/Provider/Router/global_router.dart';
-import 'package:admin/Screens/Academic/ManageTeacher/Service/Create/createTeacherBackend.dart';
-import 'package:admin/Screens/CrudStudent/Provider/isLoadingProvider.dart';
+
 import 'package:admin/Global/Widget/pickImg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -32,7 +33,7 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
       TextEditingController();
   final TextEditingController _experieceController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-  final TextEditingController _idController = TextEditingController();
+
   final TextEditingController _passwrodController = TextEditingController();
   final TextEditingController _repasswrodController = TextEditingController();
   Map<String, dynamic>? _imagedata;
