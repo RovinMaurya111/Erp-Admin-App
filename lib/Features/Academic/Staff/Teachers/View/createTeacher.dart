@@ -58,7 +58,7 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
           ),
           Center(
             child: Container(
-              width: 900,
+              width: 970,
               padding: const EdgeInsets.fromLTRB(30, 20, 30, 40),
               decoration: BoxDecoration(
                 color: Colors.white,
@@ -72,114 +72,152 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
                   ),
                 ],
               ),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
+              child: Row(
                 children: [
-                  Row(
-                    children: [
-                      IconButton(
-                        icon: const Icon(Icons.arrow_back_ios),
-                        onPressed: () {
-                          router.pop();
-                        },
-                      ),
-                      Expanded(
-                        child: const Center(
-                          child: Text(
-                            "Create Teacher Profile",
-                            style: TextStyle(
-                              fontSize: 28,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.black87,
+                  SizedBox(
+                    width: 600,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Row(
+                          children: [
+                            IconButton(
+                              icon: const Icon(Icons.arrow_back_ios),
+                              onPressed: () {
+                                router.pop();
+                              },
+                            ),
+                            Expanded(
+                              child: const Center(
+                                child: Text(
+                                  "Create Teacher Profile",
+                                  style: TextStyle(
+                                    fontSize: 28,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black87,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Gap(20),
+                        //
+                        // profile image
+                        CircleAvatar(
+                          radius: 70,
+                          backgroundColor: Colors.black,
+                          child: CircleAvatar(
+                            radius: 68,
+                            backgroundImage: MemoryImage(
+                              _imagedata?['bytes'] ?? Uint8List(0),
+                              scale: 1.0,
+                            ),
+                            child: IconButton(
+                              onPressed: () async {
+                                final newImage = await pickImg();
+                                setState(() {
+                                  if (newImage != null) {
+                                    _imagedata = newImage;
+                                  }
+                                });
+                                //
+                              },
+                              icon: const Icon(
+                                Icons.camera_alt_outlined,
+                                color: Colors.white,
+                                size: 30,
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  const Gap(20),
-                  //
-                  // profile image
-                  CircleAvatar(
-                    radius: 62,
-                    backgroundColor: Colors.black,
-                    child: CircleAvatar(
-                      radius: 60,
-                      backgroundImage: MemoryImage(
-                        _imagedata?['bytes'] ?? Uint8List(0),
-                        scale: 1.0,
-                      ),
-                      child: IconButton(
-                        onPressed: () async {
-                          final newImage = await pickImg();
-                          setState(() {
-                            if (newImage != null) {
-                              _imagedata = newImage;
-                            }
-                          });
-                          //
-                        },
-                        icon: const Icon(
-                          Icons.camera_alt_outlined,
-                          color: Colors.white,
-                          size: 30,
+                        const Gap(25),
+                        Wrap(
+                          spacing: 20,
+                          runSpacing: 20,
+                          children: [
+                            buildTextField(
+                              "Class Teacher",
+                              _classTeacherController,
+                            ),
+                            buildTextField("Student Name", _nameController),
+
+                            buildTextField("Email", _emailController),
+
+                            buildTextField("Contact", _contactController),
+                            buildTextField(
+                              "Father/Spouse Name",
+                              _parentsController,
+                            ),
+
+                            buildTextField("Address", _addressController),
+                            buildTextField("Password", _passwrodController),
+                            buildTextField(
+                              "Re Password",
+                              _repasswrodController,
+                            ),
+                          ],
                         ),
-                      ),
+                        const SizedBox(height: 30),
+                        SizedBox(
+                          width: 250,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.deepPurple,
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                            ),
+                            onPressed: () {
+                              _formSubmission(context);
+                            },
+                            child:
+                                ref.watch(isLoadingProvider)
+                                    ? const SizedBox(
+                                      height: 20,
+                                      width: 20,
+                                      child: CircularProgressIndicator(
+                                        strokeWidth: 2,
+                                        color: Colors.white,
+                                      ),
+                                    )
+                                    : const Text(
+                                      "Create Student",
+                                      style: TextStyle(fontSize: 16),
+                                    ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
-                  const Gap(25),
-                  Wrap(
-                    spacing: 20,
-                    runSpacing: 20,
-                    children: [
-                      buildTextField("Student Name", _nameController),
-                      buildTextField("Subject", _subjectController),
-                      buildTextField("Qualification", _qualificationController),
-                      buildTextField("Email", _emailController),
-                      buildTextField("Class Teacher", _classTeacherController),
-                      buildTextField("Class", _wichClassController),
-                      buildTextField("Gender", _genderController),
-                      buildTextField("Contact", _contactController),
-                      buildTextField("Father/Spouse Name", _parentsController),
-                      buildTextField("DOB", _dobController),
-                      buildTextField(
-                        "Date Of Joining",
-                        _dateOfJoiningController,
-                      ),
-                      buildTextField("Experience", _experieceController),
-                      buildTextField("Address", _addressController),
-                      buildTextField("Password", _passwrodController),
-                      buildTextField("Re Password", _repasswrodController),
-                    ],
-                  ),
-                  const SizedBox(height: 30),
+                  //
+                  // 2nd sized box
                   SizedBox(
-                    width: 250,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.deepPurple,
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+
+                    width: 300,
+                    child: Wrap(
+                      runSpacing: 20,
+                      children: [
+                        buildTextField("DOB", _dobController),
+                        buildTextField(
+                          "Date Of Joining",
+                          _dateOfJoiningController,
                         ),
-                      ),
-                      onPressed: () {
-                        _formSubmission(context);
-                      },
-                      child:
-                          ref.watch(isLoadingProvider)
-                              ? const SizedBox(
-                                height: 20,
-                                width: 20,
-                                child: CircularProgressIndicator(
-                                  strokeWidth: 2,
-                                  color: Colors.white,
-                                ),
-                              )
-                              : const Text(
-                                "Create Student",
-                                style: TextStyle(fontSize: 16),
-                              ),
+                        buildTextField("Subject", _subjectController),
+                        buildTextField(
+                          "Qualification",
+                          _qualificationController,
+                        ),
+
+                        buildTextField("Class", _wichClassController),
+                        buildTextField("Experience", _experieceController),
+                        buildTextField("Gender", _genderController),
+                        SizedBox(
+                          width: 20,
+                          height: 90,
+                        )
+                      ],
                     ),
                   ),
                 ],
@@ -231,8 +269,7 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
   }
 
   bool _validator() {
-    return 
-       _nameController.text.isNotEmpty &&
+    return _nameController.text.isNotEmpty &&
         _subjectController.text.isNotEmpty &&
         _qualificationController.text.isNotEmpty &&
         _emailController.text.isNotEmpty &&
@@ -281,24 +318,24 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
       final createTeacher = CreateteachersBackend(
         context: context,
         name: _nameController.text.toString(),
-        subject : _subjectController.text.toString(),
-        qualification : _qualificationController.text.toString(),
-        email : _emailController.text.toString(),
-        classteacher : _classTeacherController.text.toString(),
-        wichclass : _wichClassController.text.toString(),
-        gender : _genderController.text.toString(),
-        contact : _contactController.text.toString(),
-        parents : _parentsController.text.toString(),
-        dob : _dobController.text.toString(),
-        dateOfJoining : _dateOfJoiningController.text.toString(),
-        experience:  _experieceController.text.toString(),
-        address:  _addressController.text.toString(),
-        password:  _passwrodController.text.toString(),
+        subject: _subjectController.text.toString(),
+        qualification: _qualificationController.text.toString(),
+        email: _emailController.text.toString(),
+        classteacher: _classTeacherController.text.toString(),
+        wichclass: _wichClassController.text.toString(),
+        gender: _genderController.text.toString(),
+        contact: _contactController.text.toString(),
+        parents: _parentsController.text.toString(),
+        dob: _dobController.text.toString(),
+        dateOfJoining: _dateOfJoiningController.text.toString(),
+        experience: _experieceController.text.toString(),
+        address: _addressController.text.toString(),
+        password: _passwrodController.text.toString(),
         imagedata: _imagedata ?? {},
       );
 
       await createTeacher.createTeachersData();
-      
+
       clearTextFields();
     } catch (e) {
       MotionToast.error(
