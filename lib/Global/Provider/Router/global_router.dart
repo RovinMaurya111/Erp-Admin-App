@@ -1,16 +1,16 @@
 import 'package:admin/Drawer/View/drawer.dart';
 import 'package:admin/Features/Academic/Staff/Teachers/View/createTeacher.dart';
 import 'package:admin/Features/Academic/Staff/Teachers/View/manageTeachers.dart';
-import 'package:admin/Features/Academic/StudentsList/View/studentsList.dart';
+import 'package:admin/Features/Academic/Student/View/studentsList.dart';
 import 'package:admin/Features/Academic/View/academic.dart';
 import 'package:admin/Features/Account/View/Account.dart';
 import 'package:admin/Features/Complaint/View/complaint.dart';
-import 'package:admin/Features/CrudStudent/View/createStudentScreen.dart';
+import 'package:admin/Features/Academic/Student/CrudStudent/View/createStudentScreen.dart';
 import 'package:admin/Features/Event/View/event.dart';
 import 'package:admin/Features/ExamDepartment/View/Exam.dart';
-import 'package:admin/Features/Home/View/home.dart';
+import 'package:admin/Home/View/home.dart';
 import 'package:admin/Features/OnlineClass/View/OnlineClass.dart';
-import 'package:admin/Features/Schedule/View/schedule.dart';
+import 'package:admin/Schedule/View/schedule.dart';
 import 'package:admin/Features/Settings/View/settings.dart';
 import 'package:admin/Features/Transport/View/transport.dart';
 

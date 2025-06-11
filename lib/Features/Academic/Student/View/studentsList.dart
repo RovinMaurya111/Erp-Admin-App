@@ -1,6 +1,6 @@
 
-import 'package:admin/Features/Academic/StudentsList/Widgets/customListTile.dart';
-import 'package:admin/Features/Academic/StudentsList/Widgets/customeAppBar.dart';
+import 'package:admin/Features/Academic/Student/Widgets/customListTile.dart';
+import 'package:admin/Features/Academic/Student/Widgets/customeAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 

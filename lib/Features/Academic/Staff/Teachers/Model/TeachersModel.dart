@@ -5,7 +5,7 @@ class TeachersModel{
   String subject;
   String qualification;
   String email;
-  String classteacher;
+  bool classteacher;
   String wichclass;
   String gender;
   String contact;

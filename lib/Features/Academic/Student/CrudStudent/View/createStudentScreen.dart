@@ -1,8 +1,8 @@
 
 import 'dart:typed_data';
 import 'dart:ui' show ImageFilter;
-import 'package:admin/Features/CrudStudent/Provider/isLoadingProvider.dart';
-import 'package:admin/Features/CrudStudent/Service/crudStudent.dart';
+import 'package:admin/Features/Academic/Student/CrudStudent/Provider/isLoadingProvider.dart';
+import 'package:admin/Features/Academic/Student/CrudStudent/Service/crudStudent.dart';
 import 'package:admin/Global/Widget/pickImg.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';

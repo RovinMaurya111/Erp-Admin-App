@@ -22,7 +22,7 @@ class _MyAppState extends ConsumerState<MyApp> {
   return MaterialApp.router(
   // 
   routerConfig: router,
-
+  
   // 
   themeMode: ThemeMode.system,
   theme: DarkAndLight.lightTheme,

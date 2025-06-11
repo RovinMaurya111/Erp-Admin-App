@@ -1,7 +1,13 @@
 import 'dart:typed_data';
 import 'dart:ui' show ImageFilter;
+import 'package:admin/Features/Academic/Staff/Teachers/Provider/datePickerProvider.dart';
+import 'package:admin/Features/Academic/Staff/Teachers/Provider/dropDownValueProvider.dart';
+import 'package:admin/Features/Academic/Staff/Teachers/Provider/radioButton.dart';
 import 'package:admin/Features/Academic/Staff/Teachers/Service/Create/createTeacherBackend.dart';
-import 'package:admin/Features/CrudStudent/Provider/isLoadingProvider.dart';
+import 'package:admin/Features/Academic/Staff/Teachers/Widget/DropDownButton/customDropDownButton.dart';
+import 'package:admin/Features/Academic/Staff/Teachers/Widget/customRadioButton.dart';
+import 'package:admin/Features/Academic/Staff/Teachers/Widget/dateContainer.dart';
+import 'package:admin/Features/Academic/Student/CrudStudent/Provider/isLoadingProvider.dart';
 import 'package:admin/Global/Provider/Router/global_router.dart';
 
 import 'package:admin/Global/Widget/pickImg.dart';
@@ -19,21 +25,10 @@ class CreateTeacher extends ConsumerStatefulWidget {
 
 class _CreatestudentState extends ConsumerState<CreateTeacher> {
   final TextEditingController _nameController = TextEditingController();
-  final TextEditingController _subjectController = TextEditingController();
-  final TextEditingController _qualificationController =
-      TextEditingController();
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _classTeacherController = TextEditingController();
-  final TextEditingController _wichClassController = TextEditingController();
-  final TextEditingController _genderController = TextEditingController();
   final TextEditingController _contactController = TextEditingController();
   final TextEditingController _parentsController = TextEditingController();
-  final TextEditingController _dobController = TextEditingController();
-  final TextEditingController _dateOfJoiningController =
-      TextEditingController();
-  final TextEditingController _experieceController = TextEditingController();
   final TextEditingController _addressController = TextEditingController();
-
   final TextEditingController _passwrodController = TextEditingController();
   final TextEditingController _repasswrodController = TextEditingController();
   Map<String, dynamic>? _imagedata;
@@ -136,15 +131,11 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
                           spacing: 20,
                           runSpacing: 20,
                           children: [
-                            buildTextField(
-                              "Class Teacher",
-                              _classTeacherController,
-                            ),
-                            buildTextField("Student Name", _nameController),
+                            buildTextField("Teacher Name", _nameController),
 
                             buildTextField("Email", _emailController),
 
-                            buildTextField("Contact", _contactController),
+                            buildTextField("Mobile", _contactController),
                             buildTextField(
                               "Father/Spouse Name",
                               _parentsController,
@@ -194,29 +185,27 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
                   //
                   // 2nd sized box
                   SizedBox(
-
                     width: 300,
                     child: Wrap(
                       runSpacing: 20,
                       children: [
-                        buildTextField("DOB", _dobController),
-                        buildTextField(
-                          "Date Of Joining",
-                          _dateOfJoiningController,
+                        customRadioButton(ref),
+                        CustomDropDownButton().classButton(ref, context),
+                        CustomDropDownButton().subjectButton(ref, context),
+                        CustomDropDownButton().qualificationButton(
+                          ref,
+                          context,
                         ),
-                        buildTextField("Subject", _subjectController),
-                        buildTextField(
-                          "Qualification",
-                          _qualificationController,
-                        ),
-
-                        buildTextField("Class", _wichClassController),
-                        buildTextField("Experience", _experieceController),
-                        buildTextField("Gender", _genderController),
-                        SizedBox(
-                          width: 20,
-                          height: 90,
-                        )
+                        CustomDropDownButton().experienceButton(ref, context),
+                        DateContainer(
+                          context,
+                          ref,
+                        ).birthDateContainer(ref.watch(birthDateProvider)),
+                        DateContainer(
+                          context,
+                          ref,
+                        ).joinDateContainer(ref.watch(joiningDateProvider)),
+                        CustomDropDownButton().genderButton(ref, context),
                       ],
                     ),
                   ),
@@ -253,38 +242,47 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
   //
   void clearTextFields() {
     _nameController.clear();
-    _subjectController.clear();
-    _qualificationController.clear();
     _emailController.clear();
-    _classTeacherController.clear();
-    _wichClassController.clear();
-    _genderController.clear();
     _contactController.clear();
     _parentsController.clear();
-    _dobController.clear();
-    _dateOfJoiningController.clear();
-    _experieceController.clear();
     _addressController.clear();
     _passwrodController.clear();
+    _repasswrodController.clear();
   }
+
+  //
+  //
+  void clearAllDropDownList() {
+    ref.read(subjectProvider.notifier).state = 'Select Subject';
+    ref.read(qualificationProvider.notifier).state = 'Select Qualification';
+    ref.read(classProvider.notifier).state = 'Select Class';
+    ref.read(experienceProvider.notifier).state = 'Select Experience';
+    ref.read(genderProvider.notifier).state = 'Select Gender';
+    ref.read(birthDateProvider.notifier).state = 'Select DOB';
+    ref.read(joiningDateProvider.notifier).state = 'Select Joining';
+  }
+  //
+  //
 
   bool _validator() {
     return _nameController.text.isNotEmpty &&
-        _subjectController.text.isNotEmpty &&
-        _qualificationController.text.isNotEmpty &&
         _emailController.text.isNotEmpty &&
-        _classTeacherController.text.isNotEmpty &&
-        _wichClassController.text.isNotEmpty &&
-        _genderController.text.isNotEmpty &&
         _contactController.text.isNotEmpty &&
         _parentsController.text.isNotEmpty &&
-        _dobController.text.isNotEmpty &&
-        _dateOfJoiningController.text.isNotEmpty &&
-        _experieceController.text.isNotEmpty &&
         _addressController.text.isNotEmpty &&
         _passwrodController.text.isNotEmpty;
   }
 
+  //
+  //
+  bool dropDownValueValidator() {
+    return ref.read(subjectProvider) == 'Select Subject' ||
+        ref.read(qualificationProvider) == 'Select Qualification' ||
+        ref.read(experienceProvider) == 'Select Experience' ||
+        ref.read(genderProvider) == 'Select Gender';
+  }
+
+  //
   //
   bool _isPasswordValid() {
     return _passwrodController.text == _repasswrodController.text;
@@ -303,6 +301,28 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
       return;
     }
 
+    if (dropDownValueValidator()) {
+      MotionToast.error(
+        description: const Text("Select All Drop Down List"),
+      ).show(context);
+      return;
+    }
+
+    if (ref.read(birthDateProvider) == 'Select DOB' ||
+        ref.read(joiningDateProvider) == 'Select Joining') {
+      MotionToast.error(description: const Text("Pick Date")).show(context);
+      return;
+    }
+
+    if (ref.read(radioButtonProvider)) {
+      if (ref.read(classProvider) == 'Select Class') {
+        MotionToast.error(
+          description: const Text("Please Select if (Yes) Class Teacher"),
+        ).show(context);
+        return;
+      }
+    }
+
     if (!_isPasswordValid()) {
       MotionToast.error(
         description: const Text("Password & Confirm Password don't match"),
@@ -318,17 +338,17 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
       final createTeacher = CreateteachersBackend(
         context: context,
         name: _nameController.text.toString(),
-        subject: _subjectController.text.toString(),
-        qualification: _qualificationController.text.toString(),
+        subject: ref.read(subjectProvider),
+        qualification: ref.read(qualificationProvider),
         email: _emailController.text.toString(),
-        classteacher: _classTeacherController.text.toString(),
-        wichclass: _wichClassController.text.toString(),
-        gender: _genderController.text.toString(),
+        classteacher: ref.read(radioButtonProvider),
+        wichclass: ref.read(classProvider),
+        gender: ref.read(genderProvider),
         contact: _contactController.text.toString(),
         parents: _parentsController.text.toString(),
-        dob: _dobController.text.toString(),
-        dateOfJoining: _dateOfJoiningController.text.toString(),
-        experience: _experieceController.text.toString(),
+        dob: ref.read(birthDateProvider),
+        dateOfJoining: ref.read(joiningDateProvider),
+        experience: ref.read(experienceProvider),
         address: _addressController.text.toString(),
         password: _passwrodController.text.toString(),
         imagedata: _imagedata ?? {},
@@ -337,6 +357,7 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
       await createTeacher.createTeachersData();
 
       clearTextFields();
+      clearAllDropDownList();
     } catch (e) {
       MotionToast.error(
         description: Text("Ui Error: ${e.toString()}"),

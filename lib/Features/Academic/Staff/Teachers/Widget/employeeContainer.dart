@@ -1,5 +1,5 @@
 
-import 'package:admin/Features/Home/Provider/onHoverProvider.dart';
+import 'package:admin/Home/Provider/onHoverProvider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';

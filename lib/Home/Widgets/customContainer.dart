@@ -1,5 +1,5 @@
-import 'package:admin/Features/Home/Provider/onHoverProvider.dart';
-import 'package:admin/Features/Home/Widgets/customText.dart';
+import 'package:admin/Home/Provider/onHoverProvider.dart';
+import 'package:admin/Home/Widgets/customText.dart';
 import 'package:admin/Global/Provider/Router/global_router.dart';
 
 import 'package:flutter/material.dart';
@@ -10,8 +10,10 @@ import 'package:gap/gap.dart';
 class CustomContainer {
   final int index;
   final WidgetRef ref;
+  final String path;
+  final String text;
 
-  CustomContainer(this.index, this.ref);
+  CustomContainer(this.index, this.ref, this.path, this.text);
 
   Widget getContainer() {
     final route = ref.read(Global_Router);
@@ -57,14 +59,14 @@ class CustomContainer {
               child: Column(
                 children: [
                   SvgPicture.asset(
-                    "assets/svg/teacher.svg",
+                    path,
                     width: 150,
                     height: 80,
                     fit: BoxFit.cover,
                     allowDrawingOutsideViewBox: true,
                   ),
                   const Gap(15),
-                  customText("Manage Teachers"),
+                  customText(text),
                 ],
               ),
             ),
