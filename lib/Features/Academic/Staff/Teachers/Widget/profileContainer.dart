@@ -1,21 +1,40 @@
+import 'package:admin/Features/Academic/Staff/Teachers/Service/Read/readTeacher.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 class Profilecontainer extends StatelessWidget {
+  final index;
   final String name;
   final String subject;
   final String qualification;
   final String email;
   final String phone;
+  final String parents;
+  final String gender;
+  final String dob;
+  final String joining_date;
+  final String experience;
+  final String wich_class;
+  final String address;
+  final String password;
   final bool classteacher;
 
   const Profilecontainer({
     super.key,
+    required this.index,
     required this.name,
     required this.subject,
     required this.qualification,
     required this.email,
     required this.phone,
+    required this.parents,
+    required this.gender,
+    required this.dob,
+    required this.joining_date,
+    required this.experience,
+    required this.wich_class,
+    required this.address,
+    required this.password,
     required this.classteacher,
   });
 
@@ -87,7 +106,7 @@ class Profilecontainer extends StatelessWidget {
                             _customGrayText("Gender", 15),
                           ],
                         ),
-                        _customText("Male"),
+                        _customText(gender),
                         Gap(20),
 
                         // Contact
@@ -102,7 +121,7 @@ class Profilecontainer extends StatelessWidget {
                             _customGrayText("Contact", 15),
                           ],
                         ),
-                        _customText("7070231973"),
+                        _customText(phone),
                       ],
                     ),
 
@@ -122,7 +141,7 @@ class Profilecontainer extends StatelessWidget {
                             _customGrayText("Spuse/Father", 15),
                           ],
                         ),
-                        _customText("Ram Kumar"),
+                        _customText(parents),
                         Gap(20),
 
                         // DOB
@@ -137,7 +156,7 @@ class Profilecontainer extends StatelessWidget {
                             _customGrayText("DOB", 15),
                           ],
                         ),
-                        _customText("01/01/2000"),
+                        _customText(dob),
                         Gap(20),
                         //
                         // Age
@@ -152,6 +171,7 @@ class Profilecontainer extends StatelessWidget {
                             _customGrayText("Age", 15),
                           ],
                         ),
+                        // the age will be calculated auto with any function
                         _customText("23"),
                       ],
                     ),
@@ -184,7 +204,7 @@ class Profilecontainer extends StatelessWidget {
                             _customGrayText("Qualification", 15),
                           ],
                         ),
-                        _customText('B.BA, M.Sc'),
+                        _customText(qualification),
                         Gap(20),
 
                         // Subject
@@ -195,7 +215,7 @@ class Profilecontainer extends StatelessWidget {
                             _customGrayText("Subject", 15),
                           ],
                         ),
-                        _customText("Science"),
+                        _customText(subject),
                         Gap(20),
                       ],
                     ),
@@ -216,7 +236,7 @@ class Profilecontainer extends StatelessWidget {
                             _customGrayText("Date of Joining", 15),
                           ],
                         ),
-                        _customText("01/01/2020"),
+                        _customText(joining_date),
                         Gap(20),
 
                         // Experience
@@ -227,7 +247,7 @@ class Profilecontainer extends StatelessWidget {
                             _customGrayText("Experience", 15),
                           ],
                         ),
-                        _customText("20 Years"),
+                        _customText('$experience Years'),
                       ],
                     ),
                   ],
@@ -256,7 +276,15 @@ class Profilecontainer extends StatelessWidget {
                             _customGrayText("Class Teacher", 15),
                           ],
                         ),
-                        _customText('Yes'),
+                        Text(
+                          classteacher ? "Yes" : "No",
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            color: Colors.black,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
                         Gap(20),
                       ],
                     ),
@@ -273,10 +301,10 @@ class Profilecontainer extends StatelessWidget {
                               color: Colors.blueGrey,
                             ),
                             Gap(5),
-                            _customGrayText("Class", 15),
+                            _customGrayText('Class', 15),
                           ],
                         ),
-                        _customText("1"),
+                        _customText(wich_class??'Subject Teacher'),
                       ],
                     ),
                   ],
@@ -292,7 +320,7 @@ class Profilecontainer extends StatelessWidget {
                     _customGrayText("Email", 15),
                   ],
                 ),
-                _customText('Kumarrovin499@gmail.com'),
+                _customText(email),
                 Gap(20),
                 // Email
                 Row(
@@ -302,7 +330,7 @@ class Profilecontainer extends StatelessWidget {
                     _customGrayText("Address", 15),
                   ],
                 ),
-                _customText('Satpulia Road, 825409, koderma'),
+                _customText(address),
                 Gap(40),
                 // Security
                 _customGrayText("Security", 20),
@@ -314,7 +342,7 @@ class Profilecontainer extends StatelessWidget {
                     _customGrayText("ID", 15),
                   ],
                 ),
-                _customText("Kumarrovin499@gmail.com"),
+                _customText(phone),
                 Gap(20),
                 Row(
                   children: [
@@ -323,7 +351,7 @@ class Profilecontainer extends StatelessWidget {
                     _customGrayText("Password", 15),
                   ],
                 ),
-                _customText("Kajal@123"),
+                _customText(password),
 
                 //
                 //
@@ -336,8 +364,9 @@ class Profilecontainer extends StatelessWidget {
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
-                  onPressed: () {
-                    // null
+                  onPressed: () async {
+                    final list = await readTeacherService();
+                    print(list);
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,

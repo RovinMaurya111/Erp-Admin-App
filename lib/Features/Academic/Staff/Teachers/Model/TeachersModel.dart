@@ -51,7 +51,6 @@ class TeachersModel{
       'experience' : experience,
       'address': address,
       'password': password,
-
     };
   }
 // 
@@ -60,5 +59,9 @@ class TeachersModel{
     return jsonEncode(
       toMap(),
     );
-  } 
+  }
+
+  // 
+  // 
+  
 }

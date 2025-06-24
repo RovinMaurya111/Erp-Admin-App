@@ -1,3 +1,4 @@
+import 'package:admin/Schedule/Widget/customButton.dart';
 import 'package:admin/Schedule/Widget/scheduleDropDownButton.dart';
 import 'package:admin/Schedule/Widget/scheduleDropDownList.dart';
 import 'package:flutter/material.dart';
@@ -12,8 +13,10 @@ class CustomScheduleHeader extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //
+    // 2nd Section
     return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 20, 80, 10),
+      padding: const EdgeInsets.fromLTRB(10, 20, 30, 10),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -33,6 +36,7 @@ class CustomScheduleHeader extends StatelessWidget {
             ref,
             Scheduledropdownlist().dayList(),
           ).dropDownDayButton(),
+          Gap(30),
           ScheduleDropDownButton(
             context,
             ref,
@@ -41,13 +45,28 @@ class CustomScheduleHeader extends StatelessWidget {
           ScheduleDropDownButton(
             context,
             ref,
+            Scheduledropdownlist().sectionList(),
+          ).scheduleSectionDropDownButton(),
+          Gap(30),
+          ScheduleDropDownButton(
+            context,
+            ref,
             Scheduledropdownlist().periodList(),
           ).periodDropDownButton(),
+          Gap(30),
           ScheduleDropDownButton(
             context,
             ref,
             Scheduledropdownlist().teacherList(),
           ).teacherDropDownButton(),
+          Gap(30),
+            ScheduleDropDownButton(
+            context,
+            ref,
+            Scheduledropdownlist().scheduleSubjectList(),
+          ).scheduleSubjectDropDownButton(),
+          Gap(30),
+          scheduleCustomButton(ref,context),
         ],
       ),
     );

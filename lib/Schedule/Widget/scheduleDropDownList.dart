@@ -64,4 +64,52 @@ class Scheduledropdownlist {
       DropdownMenuItem(value: 'Santosh Pandey', child: Text('Santosh Pandey')),
     ];
   }
+  // 
+  // 
+    List<DropdownMenuItem> sectionList() {
+    return [
+      DropdownMenuItem(value: 'A', child: Text('A')),
+      DropdownMenuItem(value: 'B', child: Text('B')),
+      DropdownMenuItem(value: 'C', child: Text('C')),
+      DropdownMenuItem(value: 'D', child: Text('D')),
+    ];
+  }
+  // 
+  // 
+    List<DropdownMenuItem> scheduleSubjectList() {
+    return [
+      DropdownMenuItem(value: 'Hindi', child: Text('Hindi')),
+      DropdownMenuItem(value: 'English', child: Text('English')),
+      DropdownMenuItem(value: 'Mathematics', child: Text('Mathematics')),
+      DropdownMenuItem(value: 'Science', child: Text('Science')),
+      DropdownMenuItem(value: 'Social Science', child: Text('Social Science')),
+      DropdownMenuItem(value: 'EVS', child: Text('EVS')),
+      DropdownMenuItem(
+        value: 'Computer Science',
+        child: Text('Computer Science'),
+      ),
+      DropdownMenuItem(value: 'Physics', child: Text('Physics')),
+      DropdownMenuItem(value: 'Chemistry', child: Text('Chemistry')),
+      DropdownMenuItem(value: 'Biology', child: Text('Biology')),
+      DropdownMenuItem(value: 'History', child: Text('History')),
+      DropdownMenuItem(value: 'Geography', child: Text('Geography')),
+      DropdownMenuItem(value: 'Civics', child: Text('Civics')),
+      DropdownMenuItem(value: 'Economics', child: Text('Economics')),
+      DropdownMenuItem(
+        value: 'gA Education',
+        child: Text('Physical Education'),
+      ),
+      DropdownMenuItem(value: 'Music', child: Text('Music')),
+      DropdownMenuItem(value: 'Dance', child: Text('Dance')),
+      DropdownMenuItem(value: 'Art Education', child: Text('Art Education')),
+      DropdownMenuItem(value: 'Sanskrit', child: Text('Sanskrit')),
+      DropdownMenuItem(value: 'Urdu', child: Text('Urdu')),
+      DropdownMenuItem(value: 'Moral Science', child: Text('Moral Science')),
+      DropdownMenuItem(
+        value: 'General Knowledge',
+        child: Text('General Knowledge'),
+      ),
+      DropdownMenuItem(value: 'Wellness', child: Text('Wellness')),
+    ];
+  }
 }

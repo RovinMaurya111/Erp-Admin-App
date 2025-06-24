@@ -10,12 +10,23 @@ final scheduleClassProvider = StateProvider<String>((ref) {
   return 'Select Class';
 },);
 // 
+
 // 
 final schedulePeriodProvider = StateProvider<String>((ref) {
-  return 'Select Period';
+  return 'Period';
 },);
 // 
 // 
 final scheduleTeacherProvider = StateProvider<String>((ref) {
   return 'Select Teacher';
+},);
+// 
+// 
+final scheduleSectionProvider = StateProvider<String>((ref) {
+  return 'Sec';
+},);
+// 
+// 
+final scheduleSubjectProvider = StateProvider<String>((ref) {
+  return 'Subject';
 },);

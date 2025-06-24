@@ -9,7 +9,7 @@ class ScheduleDropDownButton {
   ScheduleDropDownButton(this.context, this.ref, this.items);
   dropDownDayButton() {
     return Container(
-      width: MediaQuery.sizeOf(context).height * 0.3,
+      width: MediaQuery.sizeOf(context).width * 0.130,
       height: 40,
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.black),
@@ -34,7 +34,7 @@ class ScheduleDropDownButton {
   //
   classDropDownButton() {
     return Container(
-      width: MediaQuery.sizeOf(context).height * 0.3,
+      width: MediaQuery.sizeOf(context).width * 0.090,
       height: 40,
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.black),
@@ -59,7 +59,7 @@ class ScheduleDropDownButton {
   //
   periodDropDownButton() {
     return Container(
-      width: MediaQuery.sizeOf(context).height * 0.3,
+      width: 100,
       height: 40,
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.black),
@@ -85,7 +85,7 @@ class ScheduleDropDownButton {
   //
   teacherDropDownButton() {
     return Container(
-      width: MediaQuery.sizeOf(context).height * 0.3,
+      width: MediaQuery.sizeOf(context).width * 0.130,
       height: 40,
       decoration: BoxDecoration(
         border: Border.all(width: 1, color: Colors.black),
@@ -101,6 +101,54 @@ class ScheduleDropDownButton {
                   value.toString();
             },
             hint: Text(ref.watch(scheduleTeacherProvider)),
+          ),
+        ),
+      ),
+    );
+  }
+  // 
+    scheduleSectionDropDownButton() {
+    return Container(
+      width: MediaQuery.sizeOf(context).width *0.050,
+      height: 40,
+      decoration: BoxDecoration(
+        border: Border.all(width: 1, color: Colors.black),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+            items: items,
+            onChanged: (value) {
+              ref.read(scheduleSectionProvider.notifier).state =
+                  value.toString();
+            },
+            hint: Text(ref.watch(scheduleSectionProvider)),
+          ),
+        ),
+      ),
+    );
+  }
+  // 
+      scheduleSubjectDropDownButton() {
+    return Container(
+      width: MediaQuery.sizeOf(context).width*0.130,
+      height: 40,
+      decoration: BoxDecoration(
+        border: Border.all(width: 1, color: Colors.black),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 10),
+        child: DropdownButtonHideUnderline(
+          child: DropdownButton(
+            items: items,
+            onChanged: (value) {
+              ref.read(scheduleSubjectProvider.notifier).state =
+                  value.toString();
+            },
+            hint: Text(ref.watch(scheduleSubjectProvider)),
           ),
         ),
       ),

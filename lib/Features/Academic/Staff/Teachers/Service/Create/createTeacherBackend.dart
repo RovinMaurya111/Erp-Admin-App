@@ -74,8 +74,8 @@ class CreateteachersBackend {
     // an image data only
     request.files.add(http.MultipartFile.fromBytes(
       'Profile_Image',
-      imagedata['bytes'], 
-      filename: imagedata['originalname'], 
+      imagedata['bytes'],
+      filename: imagedata['originalname'],
       contentType: MediaType('image', 'jpeg')
     ));
     

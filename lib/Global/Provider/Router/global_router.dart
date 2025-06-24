@@ -1,6 +1,6 @@
 import 'package:admin/Drawer/View/drawer.dart';
 import 'package:admin/Features/Academic/Staff/Teachers/View/createTeacher.dart';
-import 'package:admin/Features/Academic/Staff/Teachers/View/manageTeachers.dart';
+import 'package:admin/Features/Academic/Staff/Teachers/View/teacherList.dart';
 import 'package:admin/Features/Academic/Student/View/studentsList.dart';
 import 'package:admin/Features/Academic/View/academic.dart';
 import 'package:admin/Features/Account/View/Account.dart';
