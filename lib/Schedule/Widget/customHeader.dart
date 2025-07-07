@@ -66,7 +66,7 @@ class CustomScheduleHeader extends StatelessWidget {
             Scheduledropdownlist().scheduleSubjectList(),
           ).scheduleSubjectDropDownButton(),
           Gap(30),
-          scheduleCustomButton(ref,context),
+          ScheduleCustomButton(),
         ],
       ),
     );

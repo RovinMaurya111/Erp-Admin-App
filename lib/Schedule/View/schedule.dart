@@ -29,9 +29,6 @@ class Schedule extends ConsumerWidget {
                     // 1st container
                     child: Container(
                       width: double.maxFinite,
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 1),
-                      ),
                       child: ListView.builder(
                         itemCount: 5,
                         itemBuilder: (context, index) {
@@ -66,9 +63,6 @@ class Schedule extends ConsumerWidget {
                   // 2nd container
                   Container(
                     width: MediaQuery.sizeOf(context).width * 0.3,
-                    decoration: BoxDecoration(
-                      border: Border.all(color: Colors.black, width: 1),
-                    ),
                     child: ListView.builder(
                       itemBuilder: (context, index) {
                         return MouseRegion(

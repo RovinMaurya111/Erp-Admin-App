@@ -19,8 +19,8 @@ class Scheduledropdownlist {
   List<DropdownMenuItem> scheduleClassList() {
     return [
       DropdownMenuItem(value: 'Nursery', child: Text("Nursery")),
-      DropdownMenuItem(value: 'L.K.G', child: Text("L.K.G")),
-      DropdownMenuItem(value: 'U.K.G', child: Text("U.K.G")),
+      DropdownMenuItem(value: 'LKG', child: Text("L.K.G")),
+      DropdownMenuItem(value: 'UKG', child: Text("U.K.G")),
       DropdownMenuItem(value: '1', child: Text("1")),
       DropdownMenuItem(value: '2', child: Text("2")),
       DropdownMenuItem(value: '3', child: Text("3")),
