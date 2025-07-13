@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:motion_toast/motion_toast.dart';
 import 'package:http_parser/http_parser.dart';
 
-class CrudStudent{
+class Createstudents{
   // 
   Future<void> createStudentData(
   BuildContext context,

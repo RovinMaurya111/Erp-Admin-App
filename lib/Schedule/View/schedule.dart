@@ -1,24 +1,48 @@
-
 import 'package:admin/Schedule/Provider/scheduleListTileOnClickProvider.dart';
+import 'package:admin/Schedule/Service/ScheduleReadTeachers.dart';
 import 'package:admin/Schedule/Widget/ListTile/scheduleTeacherListTile.dart';
 import 'package:admin/Schedule/Widget/customHeader.dart';
 import 'package:admin/Schedule/Widget/ListTile/scheduleClassListTile.dart';
+import 'package:admin/Schedule/stateNotifier/schduledataNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 
-class Schedule extends ConsumerWidget {
+class Schedule extends ConsumerStatefulWidget {
   const Schedule({super.key});
-// 
-//
+
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  ConsumerState<Schedule> createState() => _ScheduleState();
+}
+
+class _ScheduleState extends ConsumerState<Schedule> {
+  //
+  List<String> teachersNameList = [];
+  futureReadTeacherList() async {
+    List getTeachersName = await scheduleReadTeachers();
+
+    for (Map teacher in getTeachersName) {
+      teachersNameList.add(teacher['name']);
+    }
+    print(teachersNameList);
+  }
+
+  @override
+  void initState() {
+    //
+    super.initState();
+    (ref.read(schduledatanotifierProvider.notifier).initMap());
+    futureReadTeacherList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 10),
         child: Column(
           children: [
-            CustomScheduleHeader(ref, context),
+            CustomScheduleHeader(teachersNameList, ref, context),
             const SizedBox(height: 20),
             Expanded(
               child: Row(
@@ -26,8 +50,9 @@ class Schedule extends ConsumerWidget {
                 children: [
                   Expanded(
                     //
+                    //
                     // 1st container
-                    child: Container(
+                    child: SizedBox(
                       width: double.maxFinite,
                       child: ListView.builder(
                         itemCount: 5,
@@ -42,7 +67,6 @@ class Schedule extends ConsumerWidget {
                                   )
                                   .state = true;
                             },
-
                             onExit: (event) {
                               ref
                                   .read(
@@ -58,20 +82,25 @@ class Schedule extends ConsumerWidget {
                       ),
                     ),
                   ),
-                  Gap(20),
+                  const Gap(20),
+                  //
                   //
                   // 2nd container
-                  Container(
+                  SizedBox(
                     width: MediaQuery.sizeOf(context).width * 0.3,
                     child: ListView.builder(
+                      itemCount: 5,
                       itemBuilder: (context, index) {
                         return MouseRegion(
                           cursor: SystemMouseCursors.click,
                           child: GestureDetector(
                             onTap: () {
-                              ref.read(onClickNotifierProvider.notifier).expose(index);
+                              ref
+                                  .read(onClickNotifierProvider.notifier)
+                                  .expose(index);
                             },
-                            child: teacherListTile(ref, index)),
+                            child: teacherListTile(ref, index),
+                          ),
                         );
                       },
                     ),

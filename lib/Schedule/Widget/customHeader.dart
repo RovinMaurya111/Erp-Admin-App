@@ -1,4 +1,4 @@
-import 'package:admin/Schedule/Widget/customButton.dart';
+import 'package:admin/Schedule/Widget/scheduleCustomButton.dart';
 import 'package:admin/Schedule/Widget/scheduleDropDownButton.dart';
 import 'package:admin/Schedule/Widget/scheduleDropDownList.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +8,14 @@ import 'package:gap/gap.dart';
 class CustomScheduleHeader extends StatelessWidget {
   WidgetRef ref;
   BuildContext context;
+  List<String> teachersNameList;
 
-  CustomScheduleHeader(this.ref, this.context, {super.key});
+  CustomScheduleHeader(
+    this.teachersNameList,
+    this.ref,
+    this.context, {
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -57,10 +63,10 @@ class CustomScheduleHeader extends StatelessWidget {
           ScheduleDropDownButton(
             context,
             ref,
-            Scheduledropdownlist().teacherList(),
+            Scheduledropdownlist().scheduleTeachersList(teachersNameList),
           ).teacherDropDownButton(),
           Gap(30),
-            ScheduleDropDownButton(
+          ScheduleDropDownButton(
             context,
             ref,
             Scheduledropdownlist().scheduleSubjectList(),

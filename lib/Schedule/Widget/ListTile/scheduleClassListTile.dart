@@ -32,7 +32,7 @@ Widget scheduleListTile(WidgetRef ref, index) {
           // Top Row
           Row(
             children: [
-              // Class name
+              //
               SizedBox(
                 width: 120,
                 child: Text(
@@ -49,6 +49,7 @@ Widget scheduleListTile(WidgetRef ref, index) {
 
               // Student avatars
               ...List.generate(8, (i) {
+                int a = i + 1;
                 return Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 6),
                   child: Column(
@@ -63,7 +64,7 @@ Widget scheduleListTile(WidgetRef ref, index) {
                         ),
                       ),
                       Gap(5),
-                      Text(i.toString()),
+                      Text(a.toString()),
                     ],
                   ),
                 );

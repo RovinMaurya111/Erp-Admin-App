@@ -28,7 +28,6 @@ class _ManageTeacherList extends ConsumerState<Manageteachers> {
   }
 
   load() async {
-    ref.read(isPageLoadingProvider.notifier).state = false;
     await Future.delayed(Duration(seconds: 5));
     var res = await readTeacherService();
     list = res;

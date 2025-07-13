@@ -1,4 +1,5 @@
 import 'package:admin/Schedule/Provider/scheduleDropDownProvider.dart';
+import 'package:admin/Schedule/stateNotifier/schduledataNotifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:motion_toast/motion_toast.dart';
@@ -12,41 +13,15 @@ class ScheduleCustomButton extends ConsumerStatefulWidget {
 }
 
 class _ScheduleCustomButtonState extends ConsumerState<ScheduleCustomButton> {
-  //
-  Map selectedClasses = {};
 
-  List<String> classes = [
-    'Nursery',
-    'LKG',
-    'UKG',
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-  ];
-
-  @override
-  void initState() {
-    super.initState();
-    //
-    for (String className in classes) {
-      selectedClasses[className] = [
-        {"A": []},
-        {"B": []},
-        {"C": []},
-        {"D": []},
-      ];
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
+    final day = ref.read(scheduleDayProvider);
+    final scheduleClass = ref.read(scheduleClassProvider);
+    final section = ref.read(scheduleSectionProvider);
+    final period = ref.read(schedulePeriodProvider);
+    final subject = ref.read(scheduleSubjectProvider);
     return ElevatedButton.icon(
       icon: const Icon(Icons.add, size: 20, color: Colors.white),
       label: const Text(
@@ -65,15 +40,15 @@ class _ScheduleCustomButtonState extends ConsumerState<ScheduleCustomButton> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       onPressed: () {
-        //
         if (isScheduleInvalid(ref)) {
           MotionToast.error(
-            description: const Text("Select Drop Down Button"),
+            description: const Text('Please Select the List'),
           ).show(context);
           return;
         }
 
-        Map<String, List<Map<String, String>>> period = {
+        // 
+        Map<String, List<Map<String, String>>> periods = {
           ref.read(schedulePeriodProvider): [
             {
               "Teacher": ref.read(scheduleTeacherProvider),
@@ -81,44 +56,22 @@ class _ScheduleCustomButtonState extends ConsumerState<ScheduleCustomButton> {
             },
           ],
         };
-
-        final classProvider = ref.read(scheduleClassProvider);
-        final section = ref.read(scheduleSectionProvider);
-
-        int sectiontoIndex(String section) {
-          switch (section) {
-            case 'A':
-              return 0;
-            case 'B':
-              return 1;
-            case 'C':
-              return 2;
-            case 'D':
-              return 3;
-            default:
-              return -1; // Invalid section
-          }
-        }
-
-        if(checkDuplicateData(
-            selectedClasses[classProvider][sectiontoIndex(section)][section],
-            section,
-          )){
-            MotionToast.error(
-              description: const Text("Duplicate Period Detected"),
-            ).show(context);
-            return;
-        }
-        //
-        print("adding in a map");
-        selectedClasses[classProvider][sectiontoIndex(section)][section].add(
-          period,
+// 
+        (ref.read(
+          schduledatanotifierProvider.notifier,
+        )).addPeriod(
+          day,
+          scheduleClass,
+          section,
+          periods,
+          context,
+          ref,
         );
-        print(selectedClasses);
+        print(ref.read(schduledatanotifierProvider.notifier).state);
       },
     );
   }
-
+// 
   bool isScheduleInvalid(WidgetRef ref) {
     return (ref.read(scheduleDayProvider) == 'Select Day' ||
         ref.read(scheduleClassProvider) == 'Select Class' ||
@@ -128,14 +81,5 @@ class _ScheduleCustomButtonState extends ConsumerState<ScheduleCustomButton> {
         ref.read(scheduleSubjectProvider) == 'Subject');
   }
 
-  //
-  bool checkDuplicateData(List sectionData, String section) {
-    for (var data in sectionData) {
-      var key = data.keys.first;
-      if (ref.read(schedulePeriodProvider) == key) {
-        return true;
-      } 
-    }
-    return false;
-  }
+
 }

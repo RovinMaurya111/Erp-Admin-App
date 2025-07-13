@@ -53,20 +53,19 @@ class Scheduledropdownlist {
 
   //
   //
-  // this list will be taken from database and then implement here
-  List<DropdownMenuItem> teacherList() {
-    return [
-      DropdownMenuItem(value: 'Meenu Kumari', child: Text('Meenu Kumari')),
-      DropdownMenuItem(value: 'Kajal Kumari', child: Text('Kajal Kumari')),
-      DropdownMenuItem(value: 'Sudesh Kumar', child: Text('Sudesh Kumar')),
-      DropdownMenuItem(value: 'Ram Kumar', child: Text('Ram Kumar')),
-      DropdownMenuItem(value: 'Sumant Bharti', child: Text('Sumant Bharti')),
-      DropdownMenuItem(value: 'Santosh Pandey', child: Text('Santosh Pandey')),
-    ];
+  List<DropdownMenuItem> scheduleTeachersList(List<String> teacherListName) {
+    List<DropdownMenuItem> teachersList = [];
+    for (var teacherName in teacherListName) {
+      teachersList.add(
+        DropdownMenuItem(value: teacherName, child: Text(teacherName)),
+      );
+    }
+    return teachersList;
   }
-  // 
-  // 
-    List<DropdownMenuItem> sectionList() {
+
+  //
+  //
+  List<DropdownMenuItem> sectionList() {
     return [
       DropdownMenuItem(value: 'A', child: Text('A')),
       DropdownMenuItem(value: 'B', child: Text('B')),
@@ -74,9 +73,10 @@ class Scheduledropdownlist {
       DropdownMenuItem(value: 'D', child: Text('D')),
     ];
   }
-  // 
-  // 
-    List<DropdownMenuItem> scheduleSubjectList() {
+
+  //
+  //
+  List<DropdownMenuItem> scheduleSubjectList() {
     return [
       DropdownMenuItem(value: 'Hindi', child: Text('Hindi')),
       DropdownMenuItem(value: 'English', child: Text('English')),

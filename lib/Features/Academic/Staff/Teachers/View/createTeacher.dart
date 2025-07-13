@@ -288,9 +288,7 @@ class _CreatestudentState extends ConsumerState<CreateTeacher> {
     return _passwrodController.text == _repasswrodController.text;
   }
 
-  //
-  //
-  //
+
   // submisstion form
   //
   _formSubmission(BuildContext context) async {
